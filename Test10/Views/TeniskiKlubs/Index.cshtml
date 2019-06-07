@@ -1,0 +1,135 @@
+﻿@model IEnumerable<Test10.Models.TeniskiKlub>
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    body {
+        background-image: url(/images/ball-court-design-209977123.jpg);
+        background-size: cover;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .gumb {
+        background-color: #4CAF50;
+        color: white;
+        transition-duration: 0.4s;
+    }
+
+        .gumb:hover {
+            background-color: white;
+            color: #4CAF50;
+        }
+
+    .gumbi {
+        color: white;
+        transition-duration: 0.4s;
+        font-size:7px;
+    }
+
+        .gumbi:hover {
+            background-color: white;
+        }
+
+    .brisanje {
+        background-color: #e60000;
+    }
+
+        .brisanje:hover {
+            color: #e60000;
+        }
+
+    .uredi {
+        background-color: #ffcc00;
+    }
+
+        .uredi:hover {
+            color: #ffcc00;
+        }
+
+    .detalj {
+        background-color: #0000ff;
+    }
+
+        .detalj:hover {
+            color: #0000ff;
+        }
+</style>
+
+<body>
+    <h2 style="color:white"><b>Teniski klubovi</b></h2>
+
+    <p>
+        @if (User.IsInRole("Upravitelj"))
+        {
+            <a asp-action="Create" class="btn gumb"><i class="fas fa-plus" style='font-size:15px'> Stvori novi klub</i></a>
+        }
+    </p>
+
+    <!-- <form asp-action="Index" method="get" style="background-color:#d9d9d9;border-radius: 5px">
+          <div class="form-actions no-color">
+              <p>
+                  Pronađi klub: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+                  <input type="submit" value="Search" class="btn btn-default" /> |
+                  <a asp-action="Index"> Pregledaj sve </a>
+              </p>
+          </div>
+      </form>
+        -->
+
+    <table class="table" style="background-color:white;border-radius: 10px">
+        <thead>
+            <tr style="font-weight: 900;color: #ffffff;background:#cc5200;border-radius: 10px">
+                <th>
+                    @Html.DisplayNameFor(model => model.Naziv)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Adresa)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BrojTerena)
+                </th>
+                <!--   <th>
+                       @Html.DisplayNameFor(model => model.Upravitelj)
+                   </th> -->
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-area="" asp-controller="Terens" asp-action="IndexKluba" asp-route-id="@item.IdTeniskiKlub">@Html.DisplayFor(modelItem => item.Naziv)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Adresa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BrojTerena)
+                    </td>
+                    <!--
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Upravitelj.Ime)
+                                @Html.DisplayFor(modelItem => item.Upravitelj.Prezime)
+                            </td>
+                    -->
+                    <td>
+                        @if (User.IsInRole("Upravitelj") && item.UpraviteljId == UserManager.GetUserId(User))
+                        {
+                            <a class="btn gumb uredi" asp-action="Edit" asp-route-id="@item.IdTeniskiKlub"><i class="far fa-edit" style='font-size:13px'></i></a>
+                            <!--a class="btn gumb brisanje" asp-action="Delete" asp-route-id="@item.IdTeniskiKlub"><i class="far fa-trash-alt" style='font-size:13px'></i>  </a> -->
+                        }
+
+                        <a class="btn gumb detalj" asp-action="Details" asp-route-id="@item.IdTeniskiKlub"><i class="fas fa-ellipsis-h" style='font-size:13px'></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+

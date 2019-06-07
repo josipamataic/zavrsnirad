@@ -1,0 +1,51 @@
+﻿@model Test10.Models.Teren
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<style>
+    body {
+        background-image: url(/images/ball-court-design-209977123.jpg);
+        background-size: cover;
+    }
+</style>
+<body>
+    <h2 style="color:white"><b>Brisanje</b></h2>
+    <h3 style="color:white"><b>Jeste li sigurni da želite obrisati ovaj teren?</b></h3>
+    <div style="height:150px;width:400px ;background-color:#d9d9d9;border-radius: 15px">
+       
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.NazivTerena)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NazivTerena)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Prostor)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Prostor)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Podloga)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Podloga.IdPodloga)
+            </dd>
+            <dt>
+                Teniski klub
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.TeniskiKlub.Naziv)
+            </dd>
+        </dl>
+        <div align="center">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="IdTeren" />
+                <input type="submit" value="Obriši" class="btn btn-danger" /> |
+                <a class="btn btn-default" asp-action="Index">Povratak na popis</a>
+            </form>
+        </div>
+    </div>
+</body>

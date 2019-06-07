@@ -1,0 +1,45 @@
+﻿@model Test10.Models.Teren
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2 style="color:white">Detalji</h2>
+
+<div>
+    <h4>Teren</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Naziv terena
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NazivTerena)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Prostor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Prostor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Podloga)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Podloga.NazivPodloga)
+        </dd>
+        <dt>
+            Teniski klub
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeniskiKlub.Naziv)
+        </dd>
+    </dl>
+</div>
+<div>
+    @if (User.IsInRole("Upravitelj") && Model.TeniskiKlub.UpraviteljId == UserManager.GetUserId(User))
+    {
+        <a asp-action="Edit" asp-route-id="@Model.IdTeren">Uredi</a>
+    }
+    <a asp-action="Index">Povratak na popis</a>
+</div>

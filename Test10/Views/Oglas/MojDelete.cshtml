@@ -1,0 +1,45 @@
+﻿@model Test10.Models.Oglas
+
+@{
+    ViewData["Title"] = "MojDelete";
+}
+<style>
+    body {
+        background-image: url(/images/ball-court-design-209977123.jpg);
+        background-size: cover;
+    }
+</style>
+
+<h2 style="color:white"><b>Brisanje</b></h2>
+
+<h3 style="color:white">Jeste li sigurni da želite obrisati ovaj oglas?</h3>
+<div style="height:160px;width:400px ;background-color:#d9d9d9;border-radius: 15px">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Naslov
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NazivOglas)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+        <dt>
+            Teniski klub
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeniskiKlub.Naziv)
+        </dd>
+    </dl>
+    <div align="center">
+        <form asp-action="MojDelete">
+            <input type="hidden" asp-for="IdOglas" />
+            <input type="submit" value="Obriši" class="btn btn-danger" /> |
+            <a class="btn btn-default" asp-action="MojiOglasi">Povratak na listu</a>
+        </form>
+        </div>
+    </div>

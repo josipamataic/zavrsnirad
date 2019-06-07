@@ -1,0 +1,46 @@
+﻿@model Test10.Models.Oglas
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Brisanje</h2>
+
+<h3>Jeste li sigurni da želite obrisati ovaj oglas?</h3>
+<div>
+    <h4>Oglas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Naslov
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NazivOglas)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+        <dt>
+            Igrač
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Igrac.Ime)
+            @Html.DisplayFor(model => model.Igrac.Prezime)
+        </dd>
+        <dt>
+            Teniski klub
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeniskiKlub.Naziv)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdOglas" />
+        <input type="submit" value="Obriši" class="btn btn-default" /> |
+        <a asp-action="Index">Povratak na listu</a>
+    </form>
+</div>

@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Test10.Models.Rezervacija>
+
+@(Html.DevExtreme().Scheduler()
+        .DataSource(ds => ds.Mvc()
+            .Controller("SchedulerData")
+            .LoadAction("Get")
+            .InsertAction("Post")
+            .UpdateAction("Put")
+            .DeleteAction("Delete")
+            .Key("IdRezervacija"))
+        .TextExpr("Teren.NazivTerena")
+        .StartDateExpr("DatumVrijeme")
+        .EndDateExpr("Kraj")
+        .RemoteFiltering(true)
+        .Views(new SchedulerViewType[] {
+SchedulerViewType.TimelineDay,
+SchedulerViewType.TimelineWeek,
+SchedulerViewType.TimelineWorkWeek,
+SchedulerViewType.TimelineMonth
+        })
+        .CurrentView(SchedulerViewType.TimelineMonth)
+        .CurrentDate(DateTime.Today)
+        .FirstDayOfWeek(FirstDayOfWeek.Monday)
+        .StartDayHour(8)
+        .EndDayHour(22)
+        .CellDuration(60)
+        .Groups(new string[] { "Teren" })
+        .Resources(res =>
+        {
+            res.Add()
+                .FieldExpr("OwnerId")
+                .AllowMultiple(true)
+                .Label("Owner")
+                .UseColorAsDefault(true)
+                .DataSource(new object[] {
+        new { id = 1, text = "Samantha Bright", color = "#cb6bb2" },
+        new { id = 2, text = "John Heart", color = "#56ca85" },
+        new { id = 3, text = "Todd Hoffman", color = "#1e90ff" },
+        new { id = 4, text = "Sandra Johnson", color = "#ff9747" }
+                });
+
+            res.Add()
+                .FieldExpr("Teren")
+                .AllowMultiple(false)
+                .Label("Teren")
+                .DataSource(new object[] {
+        new { id = "Low", text = "Low Priority", color = "#1e90ff" },
+        new { id = "High", text = "High Priority", color = "#ff9747" }
+                });
+        })
+        .Height(580)
+)
+<!--
+<h2>Index</h2>
+
+@(Html.DevExtreme().DataGrid<Test10.Models.Rezervacija>()
+    .DataSource(ds => ds.Mvc()
+        .Controller("RezervacijaScheduler")
+        .LoadAction("Get")
+        .InsertAction("Post")
+        .UpdateAction("Put")
+        .DeleteAction("Delete")
+        .Key("IdRezervacija")
+    )
+    .RemoteOperations(true)
+    .Columns(columns => {
+
+        columns.AddFor(m => m.IdRezervacija);
+
+        columns.AddFor(m => m.DatumVrijeme);
+
+        columns.AddFor(m => m.Kraj);
+
+        columns.AddFor(m => m.TerenId);
+
+        columns.AddFor(m => m.UpraviteljId);
+
+        columns.AddFor(m => m.IgracId);
+    })
+    .Editing(e => e
+        .AllowAdding(true)
+        .AllowUpdating(true)
+        .AllowDeleting(true)
+    )
+)
+    -->

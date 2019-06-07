@@ -1,0 +1,65 @@
+﻿@model Test10.Models.TeniskiKlub
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Details";
+}
+<style>
+    body {
+        background-image: url(/images/ball-court-design-209977123.jpg);
+        background-size: cover;
+    }
+    .uredi {
+        background-color: #ffcc00;
+        color: white;
+    }
+        .uredi:hover {
+            background-color: white;
+            color: #ffcc00;
+        }
+
+</style>
+<body>
+    <h2 style="color:white"><b>Detalji</b></h2>
+
+    <div style="height:180px;width:400px ;background-color:#d9d9d9;border-radius: 15px">
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Naziv)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Adresa)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Adresa)
+            </dd>
+            <dt>
+                Broj terena
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BrojTerena)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Upravitelj)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Upravitelj.Ime)
+                @Html.DisplayFor(model => model.Upravitelj.Prezime)
+            </dd>
+        </dl>
+        <div align="center">
+            @if (User.IsInRole("Upravitelj") && Model.UpraviteljId == UserManager.GetUserId(User))
+            {
+                <a class="btn uredi" asp-action="Edit" asp-route-id="@Model.IdTeniskiKlub"><i class="far fa-edit" style='font-size:13px'></i> Uredi</a>
+            }
+
+            <a class="btn btn-default" asp-action="Index">Povratak na popis</a>
+        </div>
+    </div>
+    
+
+
+</body>

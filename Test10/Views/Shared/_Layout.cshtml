@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ZavrsniRad</title>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#00004d;">
+            <div class="container">               
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <img class="nav navbar-nav navbar-left" src="~/images/ICFball4-512.png" width="33" height="40" style="padding-top:12px;padding-right:5px;" />
+                    <a style="color:white;font-size:20px" asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"> Igraj tenis</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+
+                        <li><a style="color:white;font-size:18px" asp-area="" asp-controller="TeniskiKlubs" asp-action="Index">Klubovi</a></li>
+                        <li><a style="color:white;font-size:18px" asp-area="" asp-controller="Terens" asp-action="Index">Tereni</a></li>
+                        @if (User.IsInRole("Igrac"))
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i style="color:white;font-size:21px" class="far fa-envelope"></i><span class="caret"></span></a>
+                                <!-- <button class="btn"><i class="far fa-envelope"></i></button>-->
+                                <ul class="dropdown-menu" style="background-color:#b3b3ff;font-size:16px">
+                                    <li><a asp-area="" asp-controller="Porukas" asp-action="PrimljenePoruke">Primljene poruke</a></li>
+                                    <li><a asp-area="" asp-controller="Porukas" asp-action="PoslanePoruke">Poslane poruke</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a style="color:white;font-size:18px" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Oglasi<span class="caret"></span></a>
+                                <!-- <button class="btn"><i class="far fa-envelope"></i></button>-->
+                                <ul class="dropdown-menu" style="background-color:#b3b3ff;font-size:16px">
+                                    <li><a asp-area="" asp-controller="Oglas" asp-action="SviOglasi">Oglasi</a></li>
+                                    <li><a asp-area="" asp-controller="Oglas" asp-action="MojiOglasi">Moji oglasi</a></li>
+                                    <li><a asp-area="" asp-controller="Oglas" asp-action="MojCreate"><i class="fas fa-plus"></i> Novi oglas</a></li>
+                                </ul>
+                            </li>
+                        }
+
+                    </ul>
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
+            </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2019 - Teniski tereni</p>
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+    </body>
+</html>

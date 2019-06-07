@@ -1,0 +1,44 @@
+﻿@model Test10.Models.Oglas
+
+@{
+    ViewData["Title"] = "MojCreate";
+}
+<style>
+    body {
+        background-image: url(/images/ball-court-design-209977123.jpg);
+        background-size: cover;
+    }
+</style>
+<h2 style="color:white">Stvori novi oglas</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4" style="height:auto;padding-bottom:10px;padding-top:10px;background-color:#d9d9d9;border-radius: 15px;">
+        <form asp-action="MojCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NazivOglas" class="control-label">Naslov</label>
+                <input asp-for="NazivOglas" class="form-control" />
+                <span asp-validation-for="NazivOglas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Opis" class="control-label">Oglas</label>
+                <textarea asp-for="Opis" class="form-control"></textarea>
+                <span asp-validation-for="Opis" class="text-danger"></span>
+            </div>
+            <!-- <div class="form-group">
+                <label asp-for="IgracId" class="control-label"></label>
+                <select asp-for="IgracId" class ="form-control" asp-items="ViewBag.IgracId"></select>
+            </div> -->
+            <div class="form-group">
+                <label asp-for="TeniskiKlubId" class="control-label">Teniski klub</label>
+                <select asp-for="TeniskiKlubId" class="form-control" asp-items="ViewBag.TeniskiKlubId"></select>
+            </div>
+            <div class="form-group" align="center">
+                <input type="submit" value="Stvori" class="btn btn-success" /> |
+                <a class="btn btn-default" asp-action="MojiOglasi">Povratak na popis</a>
+
+            </div>
+        </form>
+    </div>
+</div>
+

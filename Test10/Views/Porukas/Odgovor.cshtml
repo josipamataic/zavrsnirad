@@ -1,0 +1,46 @@
+﻿@model Test10.Models.Poruka
+
+@{
+    ViewData["Title"] = "Odgovor";
+}
+<style>
+    body {
+        background-image: url(/images/ball-court-design-209977123.jpg);
+        background-size: cover;
+    }
+</style>
+
+<h3 style="color:white"><b>Nova poruka za: @ViewBag.primateljIme @ViewBag.primateljPrezime </b></h3>
+
+<div class="row">
+<div class="col-md-4" style="height:200px;background-color:#d9d9d9;border-radius: 15px;">
+    <form asp-action="Odgovor" asp-route-IdPosiljatelj="@ViewBag.IgracPrimateljId">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="NaslovPoruke" class="control-label">Naslov poruke</label>
+            <input asp-for="NaslovPoruke" class="form-control" />
+            <span asp-validation-for="NaslovPoruke" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="TekstPoruke" class="control-label">Tekst poruke</label>
+            <input asp-for="TekstPoruke" class="form-control" />
+            <span asp-validation-for="TekstPoruke" class="text-danger"></span>
+        </div>
+
+        <!--  <div class="form-group">
+            <label asp-for="Vrijeme" class="control-label"></label>
+            <input asp-for="Vrijeme" class="form-control" />
+            <span asp-validation-for="Vrijeme" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+        <label asp-for="IgracPrimateljId" class="control-label"></label>
+        <select asp-for="IgracPrimateljId" class="form-control" asp-items="ViewBag.IgracPrimateljId"></select>
+    </div>-->
+        <div class="form-group" align="center">
+            <input type="submit" value="Pošalji" class="btn btn-success" />
+
+        </div>
+    </form>
+</div>
+</div>
+

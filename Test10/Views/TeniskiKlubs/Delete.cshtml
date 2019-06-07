@@ -1,0 +1,53 @@
+﻿@model Test10.Models.TeniskiKlub
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<style>
+    body {
+        background-image: url(/images/ball-court-design-209977123.jpg);
+        background-size: cover;
+    }
+</style>
+<body>
+    <h2 style="color:white"><b>Brisanje</b></h2>
+    <h3 style="color:white"><b>Jeste li sigurni da želite obrisati ovaj klub?</b></h3>
+    <div style="height:200px;width:400px ;background-color:#d9d9d9;border-radius: 15px">
+        <hr />
+        <dl class="dl-horizontal" style="height:100px;width:400px ;background-color:#d9d9d9;border-radius: 15px">
+            <dt>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Naziv)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Adresa)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Adresa)
+            </dd>
+            <dt>
+                Broj terena
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BrojTerena)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Upravitelj)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Upravitelj.Ime)
+                @Html.DisplayFor(model => model.Upravitelj.Prezime)
+            </dd>
+        </dl>       
+        <div align="center">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="IdTeniskiKlub" />
+                <input type="submit" value="Obriši" class="btn btn-danger" /> |
+                <a class="btn btn-default" asp-action="Index">Povratak na popis</a>
+            </form>
+        </div>
+    </div>
+
+</body>

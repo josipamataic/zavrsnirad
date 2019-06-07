@@ -1,0 +1,47 @@
+﻿@model Test10.Models.Rezervacija
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Rezervacija</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DatumVrijeme" class="control-label"></label>
+                <input asp-for="DatumVrijeme" class="form-control" />
+                <span asp-validation-for="DatumVrijeme" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kraj" class="control-label"></label>
+                <input asp-for="Kraj" class="form-control" />
+                <span asp-validation-for="Kraj" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TerenId" class="control-label"></label>
+                <select asp-for="TerenId" class ="form-control" asp-items="ViewBag.TerenId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpraviteljId" class="control-label"></label>
+                <select asp-for="UpraviteljId" class ="form-control" asp-items="ViewBag.UpraviteljId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IgracId" class="control-label"></label>
+                <select asp-for="IgracId" class ="form-control" asp-items="ViewBag.IgracId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

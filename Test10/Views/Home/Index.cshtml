@@ -1,0 +1,73 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    body {
+        background-image: url(/images/ball-court-design-209977.jpg);
+        background-size: cover;
+    }
+
+    .gigantsko {
+        font-size: 45px;
+        letter-spacing: -.015em;
+        line-height: 1em;
+        font-weight: 400;
+        padding-bottom: -1.015em;
+        color: white;
+    }
+
+    .div {
+        width: 50px;
+    }
+</style>
+
+@if (!SignInManager.IsSignedIn(User))
+{
+    <div class="text">
+        <h1 class="gigantsko">
+            <br />
+            <br />
+            <br />
+
+            Rezerviranje terena nikad <br />nije bilo lakše.<br />
+            Prijavi se i rezerviraj teren<br />u željenom klubu!
+            <br />
+
+
+        </h1>
+        <h2 style="color:white">
+            Novi ste ovdje? <br />
+            <a class="btn btn-default" asp-area="" asp-controller="Account" asp-action="Register"><b>Registriraj se!</b></a><br /><br />
+            Već imate račun?<br />
+            <a class="btn btn-default" asp-area="" asp-controller="Account" asp-action="Login"><b>Prijavi se!</b></a><br />
+        </h2>
+    </div>
+}
+else
+{
+    
+        <br />
+        <br />
+        <br />
+
+        <h1 style="color:white"> Dobrodošli!</h1>
+
+        <br />
+        <h2 style="color:white">
+            Pregledajte klubove i terene<br />i napravite rezervaciju.<br />
+            Nemate partnera za igru?<br />
+            Postavite oglas ili pretražite <br />
+            već ponuđene!
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+
+        </h2>
+}

@@ -1,0 +1,105 @@
+﻿
+
+@model IEnumerable<Test10.Models.Teren>
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "IndexKluba";
+}
+
+<style>
+    body {
+        background-image: url(/images/ball-court-design-209977123.jpg);
+        background-size: cover;
+    }
+    .povratak {
+        background-color: #f2f2f2;
+        
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .gumbi {
+        color: white;
+        transition-duration: 0.4s;
+    
+    }
+    .gumbi:hover {
+        background-color: white;        
+    }
+
+    .brisanje {
+        background-color: #e60000;       
+    }
+    
+    .brisanje:hover {          
+        color: #e60000;
+    }
+
+    .uredi {
+        background-color: #ffcc00;
+    }
+
+        .uredi:hover {
+            color: #ffcc00;
+        }
+
+    .detalj {
+        background-color: #0000ff;
+    }
+        .detalj:hover {
+            color: #0000ff;
+        }
+    </style>
+
+<body>
+    <h2 style="color:white"><b>Tereni kluba @Html.DisplayNameFor(model => model.TeniskiKlub)</b></h2>
+
+    <table class="table" style="background-color:white;border-radius: 10px">
+        <thead>
+            <tr style="font-weight: 900;color: #ffffff;background:#cc5200;border-radius: 10px">               
+                <th>
+                    Naziv terena
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Podloga)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Prostor)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>                   
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NazivTerena)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Podloga.NazivPodloga)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Prostor)
+                    </td>
+                    <td>
+                        @if (User.IsInRole("Upravitelj") && item.TeniskiKlub.UpraviteljId == UserManager.GetUserId(User))
+                        {
+                            <a class="btn gumbi uredi" asp-action="Edit" asp-route-id="@item.IdTeren"><i class="far fa-edit" style='font-size:13px'></i> </a>
+                            <a class="btn gumbi brisanje" asp-action="Delete" asp-route-id="@item.IdTeren"><i class="far fa-trash-alt" style='font-size:13px'></i> </a>
+
+                        }
+                        <a  class="btn gumbi detalj" asp-action="Details" asp-route-id="@item.IdTeren"><i class="fas fa-info" style='font-size:13px'></i> </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <a class="btn povratak" asp-controller="TeniskiKlubs" asp-action="Index"><b>Povratak na popis</b></a>
+    </div>
+
+</body>

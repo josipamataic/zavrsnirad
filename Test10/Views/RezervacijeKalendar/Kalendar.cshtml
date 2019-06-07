@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Test10.Models.Rezervacija>
+
+@{
+    ViewData["Title"] = "Kalendar";
+}
+
+<h2>Kalendar</h2>
+
+<script src="~/js/daypilot/daypilot-all.min.js" asp-append-version="true"></script>
+
+<div id="dp"></div>
+
+<script>
+    var dp = new DayPilot.Scheduler("dp");
+    dp.startDate = DayPilot.Date.today().firstDayOfMonth();
+    dp.days = DayPilot.Date.today().daysInMonth();
+
+    dp.scale = "Hour";
+    dp.timeHeaders = [
+        { groupBy: "Day" },
+        { groupBy: "Hour", timeFormat: "Clock24Hours" }
+    ];
+    dp.resources = [
+        { name: "Resource A", id: "A"}
+    ];
+    dp.init();
+
+</script>

@@ -1,0 +1,52 @@
+﻿@model Test10.Models.Teren
+
+@{
+    ViewData["Title"] = "Create";
+}
+<style>
+    body {
+        background-image: url(/images/ball-court-design-209977123.jpg);
+        background-size: cover;
+    }
+</style>
+
+<body>
+
+    <h2 style="color:white"><b>Stvori novi teren</b></h2>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-4" style="height:auto;padding-bottom:10px;padding-top:10px;background-color:#d9d9d9;border-radius: 15px;">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="NazivTerena" class="control-label">Naziv terena</label>
+                    <input asp-for="NazivTerena" class="form-control" />
+                    <span asp-validation-for="NazivTerena" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PodlogaId" class="control-label">Podloga</label>
+                    <select asp-for="PodlogaId" class="form-control" asp-items="ViewBag.PodlogaId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Prostor" class="control-label"></label>
+                    <input asp-for="Prostor" class="form-control" />
+                    <span asp-validation-for="Prostor" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TeniskiKlubId" class="control-label">Teniski klub</label>
+                    <select asp-for="TeniskiKlubId" class="form-control" asp-items="ViewBag.TeniskiKlubId"></select>
+                </div>
+                <div class="form-group" align="center">
+                    <input type="submit" value="Stvori" class="btn btn-success" /> |
+                    <a class="btn btn-default" asp-action="Index">Povratak na popis</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

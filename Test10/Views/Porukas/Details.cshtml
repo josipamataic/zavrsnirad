@@ -1,0 +1,48 @@
+﻿@model Test10.Models.Poruka
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Poruka</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TekstPoruke)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TekstPoruke)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NaslovPoruke)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NaslovPoruke)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vrijeme)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vrijeme)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IgracPosiljatelj)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IgracPosiljatelj.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IgracPrimatelj)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IgracPrimatelj.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdPoruka">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

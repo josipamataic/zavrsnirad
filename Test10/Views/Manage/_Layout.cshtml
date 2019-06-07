@@ -1,0 +1,28 @@
+﻿@{ 
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body{
+        background-image:url(/images/ball-court-design-209977123.jpg);
+        background-size:cover;
+    }
+</style>
+
+<h2 style="color:white"><b>Uredite svoje podatke</b></h2>
+
+<div>    
+    <hr />
+    <div class="row" style="background-color:#d9d9d9;width:600px;height:auto;padding-bottom:10px;padding-top:10px;border-radius: 15px;">
+        <div class="col-md-3">
+            @await Html.PartialAsync("_ManageNav")
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
+        

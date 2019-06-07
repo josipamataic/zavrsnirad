@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Test10.Models.Oglas>
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "MojiOglasi";
+}
+<style>
+    body {
+        background-image: url(/images/ball-court-design-209977123.jpg);
+        background-size: cover;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    .gumbi {
+        color: white;
+        transition-duration: 0.4s;
+        font-size: 7px;
+    }
+
+        .gumbi:hover {
+            background-color: white;
+        }
+
+    .brisanje {
+        background-color: #e60000;
+    }
+
+        .brisanje:hover {
+            color: #e60000;
+        }
+
+    .uredi {
+        background-color: #ffcc00;
+    }
+
+        .uredi:hover {
+            color: #ffcc00;
+        }
+</style>
+
+<h2 style="color:white"><b>Moji oglasi</b></h2>
+
+
+<table class="table" style="background-color:white;border-radius: 10px">
+    <thead>
+        <tr style="font-weight: 900;color: #ffffff;background:#cc5200;border-radius: 10px">
+            <th>
+                Teniski klub
+            </th>
+            <th>
+                Datum i vrijeme
+            </th>
+            <th>
+                Naslov
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opis)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @if (item.IgracId == UserManager.GetUserId(User))
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeniskiKlub.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Datum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NazivOglas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+
+            <td>
+                <a class="btn gumbi uredi" asp-action="MojEdit" asp-route-id="@item.IdOglas"><i class="far fa-edit" style='font-size:13px'></i> </a>
+                <a class="btn gumbi brisanje" asp-action="MojDelete" asp-route-id="@item.IdOglas"><i class="far fa-trash-alt" style='font-size:13px'></i></a>
+
+            </td>
+        </tr>
+            }
+
+        }
+    </tbody>
+</table>
+

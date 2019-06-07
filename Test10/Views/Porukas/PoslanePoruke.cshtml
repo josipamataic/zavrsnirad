@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Test10.Models.Poruka>
+@inject UserManager<ApplicationUser> UserManager
+
+<style>
+    button.accordion {
+        cursor: pointer;
+        border: none;
+        outline: none;
+        width: 80%;
+        text-align: left;
+        background-color: papayawhip;
+        color: #000000;
+        padding: 8px;
+        margin: 4px 0;
+        border-radius: 4px;
+        transition: 0.3s;
+        font-size: medium;
+    }
+
+        button.accordion:hover {
+            background-color: rgba(255,255,255,0.3);
+        }
+
+        button.accordion.active {
+            background-color: #e65c00;
+            color: white;
+            border-radius: 4px 4px 0 0;
+            margin: 4px 0 0;
+        }
+
+    div.panel {
+        background-color: #ffe0cc;
+        color: #000000;
+        border-radius: 0 0 4px 4px;
+        overflow: hidden;
+        opacity: 0;
+        max-height: 0;
+        transition: 0.3s;
+        padding: 0 8px;
+        margin: 2px 0 4px;
+        width: 80%;
+    }
+
+        div.panel.show {
+            opacity: 1;
+            max-height: 500px;
+            padding: 8px;
+            margin: 0;
+        }
+
+    body {
+        background-image: url(/images/ball-court-design-209977123.jpg);
+        background-size: cover;
+    }
+</style>
+
+@{
+    ViewData["Title"] = "PoslanePoruke";
+}
+
+<body>
+    <h2 style="color:white"><b>Poslane poruke</b></h2>
+
+    @foreach (var item in Model)
+    {
+
+    <button class="accordion">
+        <b>
+            @Html.DisplayFor(modelItem => item.IgracPrimatelj.Ime)
+            @Html.DisplayFor(modelItem => item.IgracPrimatelj.Prezime) :
+        </b>
+            @Html.DisplayFor(modelItem => item.NaslovPoruke)
+             
+</button>
+    <div class="panel">
+        @Html.DisplayFor(modelItem => item.TekstPoruke)
+        <p style="text-align:left;font-size:small">Poslano: @Html.DisplayFor(modelItem => item.Vrijeme)</p>
+    </div>
+
+    }
+
+</body>

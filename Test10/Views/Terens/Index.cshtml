@@ -1,0 +1,173 @@
+﻿@model IEnumerable<Test10.Models.Teren>
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    body {
+        background-image: url(/images/ball-court-design-209977123.jpg);
+        background-size: cover;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .gumb {
+        background-color: #4CAF50;
+        color: white;
+        transition-duration: 0.4s;
+    }
+
+        .gumb:hover {
+            background-color: white;
+            color: #4CAF50;
+        }
+
+    .gumbi {
+        color: white;
+        transition-duration: 0.4s;
+    }
+
+        .gumbi:hover {
+            background-color: white;
+        }
+
+    .brisanje {
+        background-color: #e60000;
+    }
+
+        .brisanje:hover {
+            color: #e60000;
+        }
+
+    .uredi {
+        background-color: #ffcc00;
+    }
+
+        .uredi:hover {
+            color: #ffcc00;
+        }
+
+    .detalj {
+        background-color: #0000ff;
+    }
+
+        .detalj:hover {
+            color: #0000ff;
+        }
+
+        label{
+            color:white;
+        }
+</style>
+<body>
+    <h2 style="color:white"><b>Teniski tereni</b></h2>
+
+    <p>
+        @if (User.IsInRole("Upravitelj"))
+        {
+            <a asp-action="Create" class="btn gumb"><i class="fas fa-plus" style='font-size:15px'> Stvori novi teren</i></a>
+        }
+
+    </p>
+    <!--
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                <b><font size="4" style="color:white"> Pronađi klub:</font></b> <input type="text" style="border-radius: 5px" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <button type="submit" value="Search" class="btn btn-default"><i class="fas fa-search" style='font-size:15px'></i></button> |
+                <a asp-action="Index" class="btn btn-default">Pregledaj sve </a>
+            </p>
+        </div>
+    </form> -->
+    <!--<form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Pronađi klub: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-action="Index"> Pregledaj sve </a>
+            </p>
+        </div>
+    </form>-->
+
+    <table class="table" id="tableteren" style="background-color:white;border-radius: 10px">
+        <thead>
+            <tr style="font-weight: 900;color: #ffffff;background:#cc5200;border-radius: 10px">
+                <th>
+                    Teniski klub
+                </th>
+                <th>
+                    Naziv terena
+                </th>
+                <th>
+                    Podloga
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Prostor)
+                </th>
+                @if (User.IsInRole("Upravitelj"))
+                {
+                    <th></th>
+                }
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-area="" asp-controller="TeniskiKlubs" asp-action="Details" asp-route-id="@item.TeniskiKlubId"> @Html.DisplayFor(modelItem => item.TeniskiKlub.Naziv)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NazivTerena)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Podloga.NazivPodloga)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Prostor)
+                    </td>
+                    @if (User.IsInRole("Upravitelj") && item.TeniskiKlub.UpraviteljId == UserManager.GetUserId(User))
+                    {
+                        <td>
+
+                            <a class="btn gumbi uredi" asp-action="Edit" asp-route-id="@item.IdTeren"><i class="far fa-edit" style='font-size:13px'></i></a>
+                            <a class="btn gumbi brisanje" asp-action="Delete" asp-route-id="@item.IdTeren"><i class="far fa-trash-alt" style='font-size:13px'></i></a>
+
+
+                            <!-- <a asp-action="Details" asp-route-id="@item.IdTeren">Detalji</a>-->
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+
+@section scripts{
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tableteren').DataTable({
+                language: {
+                    search: "Pretraga",
+                    info: "_START_ - _END_ (ukupno _TOTAL_)",
+                    lengthMenu: "Broj zapisa po stranici: _MENU_ ",
+                    paginate: {
+                        first: "Prva",
+                        previous: "Prethodna",
+                        next: "Sljedeća",
+                        last: "Zadnja"
+                    },
+                    emptyTable: "Nema podataka za prikaz",
+                    info: "_START_ - _END_ od ukupno _TOTAL_ zapisa",
+                    infoEmpty: "Nema podataka za prikaz",
+                    infoFiltered: "(filtrirano od ukupno _MAX_ zapisa)",
+                }
+            });
+        });
+    </script>
+}

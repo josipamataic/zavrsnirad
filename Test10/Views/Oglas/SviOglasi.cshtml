@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Test10.Models.Oglas>
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "SviOglasi";
+}
+
+<style>
+    body {
+        background-image: url(/images/ball-court-design-209977123.jpg);
+        background-size: contain;
+    }
+
+    .card {
+        background-color: #fff;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        width: 60%;
+    }
+
+    .card-header {
+        border-radius: 6px 6px 0 0;
+        padding: 5px;
+        font-size: 15px;
+    }
+
+    .card .card-footer {
+        border-radius: 0 0 6px 6px;
+        padding: 5px;
+    }
+
+    .card .card-tijelo .lead {
+        text-align: center;
+    }
+
+    .card-default {
+        border-color: #ddd;
+        background-color: #fff;
+        margin-bottom: 10px;
+    }
+
+        .card-default > .card-header,
+        .card-default > .card-footer {
+            color: #333;
+            background-color: #ddd;
+        }
+
+
+    .pspor {
+        background-color: #3399ff;
+        color: white;
+        font-size: 13px;
+        transition-duration: 0.4s;
+    }
+
+        .pspor:hover {
+            color: #3399ff;
+            background-color: white;
+        }
+</style>
+
+<body>
+    <h2 style="color:white" align="center"><b>Oglasi</b></h2>
+    <hr />
+    <form asp-action="SviOglasi" method="get">
+        <div class="form-actions no-color" align="center">
+            <p>
+                <b><font size="4" style="color:white"> Pronađi klub:</font></b> <input type="text" style="border-radius: 5px" name="searchString" value="@ViewData["CurrentFilter"]" />
+                <button type="submit" value="Search" class="btn btn-default"><i class="fas fa-search" style='font-size:15px'></i></button> |
+                <a asp-action="SviOglasi" class="btn btn-default">Pregledaj sve </a>
+            </p>
+        </div>
+    </form>
+
+    @foreach (var item in Model)
+    {
+        <div align="center">
+            <div class="card card-default">
+                <div class="card-header" align="left">
+                    <b>
+                        @Html.DisplayFor(modelItem => item.Igrac.Ime)
+                        @Html.DisplayFor(modelItem => item.Igrac.Prezime) :
+                    </b> @Html.DisplayFor(modelItem => item.TeniskiKlub.Naziv)
+                </div>
+                <div class="card-tijelo">
+
+                    <p class="lead">@Html.DisplayFor(modelItem => item.NazivOglas)</p>
+                    <p style="font-size:18px;">@Html.DisplayFor(modelItem => item.Opis)</p>
+
+                </div>
+                <div class="card-footer" align="center">
+                    Objavljeno:  @Html.DisplayFor(modelItem => item.Datum) |
+                    @if (item.IgracId != UserManager.GetUserId(User))
+                    {
+                        <a class="btn pspor" asp-action="Odgovor" asp-controller="Porukas" asp-route-IdPosiljatelj="@item.IgracId"><i class="fas fa-edit" style="font-size:15px"></i>   Pošalji poruku</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+</body>

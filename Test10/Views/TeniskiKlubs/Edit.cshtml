@@ -1,0 +1,62 @@
+﻿@model Test10.Models.TeniskiKlub
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    body {
+        background-image: url(/images/ball-court-design-209977123.jpg);
+        background-size: cover;
+    }
+
+    .povratak {
+        background-color: white;
+    }
+    </style>
+
+<body>
+
+    <h2 style="color:white"><b>Uredi</b></h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4" style="height:auto;padding-bottom:10px;padding-top:10px;background-color:#d9d9d9;border-radius: 15px;">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdTeniskiKlub" />
+                <div class="form-group">
+                    <label asp-for="Naziv" class="control-label"></label>
+                    <input asp-for="Naziv" class="form-control" />
+                    <span asp-validation-for="Naziv" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Adresa" class="control-label"></label>
+                    <input asp-for="Adresa" class="form-control" />
+                    <span asp-validation-for="Adresa" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BrojTerena" class="control-label">Broj terena</label>
+                    <input asp-for="BrojTerena" class="form-control" />
+                    <span asp-validation-for="BrojTerena" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UpraviteljId" class="control-label">Upravitelj</label>
+                    <select asp-for="UpraviteljId" class="form-control" asp-items="ViewBag.Upravitelj"></select>
+                    <span asp-validation-for="UpraviteljId" class="text-danger"></span>
+                </div>
+                <div class="form-group" align="center">
+                    <input type="submit" value="Spremi" class="btn btn-success" /> |
+                    <a class="btn povratak" asp-action="Index">Povratak na popis</a>
+                </div>
+            </form>
+          <!--  <div align="center">
+                <a asp-action="Index">Povratak na popis</a>
+            </div> -->
+        </div>
+    </div>
+</body>
+   
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
