@@ -28,9 +28,9 @@ SchedulerViewType.TimelineMonth
         .Resources(res =>
         {
             res.Add()
-                .FieldExpr("OwnerId")
+                .FieldExpr("IgracId")
                 .AllowMultiple(true)
-                .Label("Owner")
+                .Label("Igrac.Ime")
                 .UseColorAsDefault(true)
                 .DataSource(new object[] {
         new { id = 1, text = "Samantha Bright", color = "#cb6bb2" },
@@ -42,7 +42,7 @@ SchedulerViewType.TimelineMonth
             res.Add()
                 .FieldExpr("Teren")
                 .AllowMultiple(false)
-                .Label("Teren")
+                .Label("Teren.NazivTerena")
                 .DataSource(new object[] {
         new { id = "Low", text = "Low Priority", color = "#1e90ff" },
         new { id = "High", text = "High Priority", color = "#ff9747" }

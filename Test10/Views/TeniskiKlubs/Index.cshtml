@@ -95,7 +95,7 @@
                 </th>
                 <!--   <th>
                        @Html.DisplayNameFor(model => model.Upravitelj)
-                   </th> -->
+                   </th> -->              
                 <th></th>
             </tr>
         </thead>
@@ -126,7 +126,7 @@
                         }
 
                         <a class="btn gumb detalj" asp-action="Details" asp-route-id="@item.IdTeniskiKlub"><i class="fas fa-ellipsis-h" style='font-size:13px'></i></a>
-                    </td>
+                        <a class="btn" asp-controller="SchedulerData" asp-action="Get" asp-route-id="@item.IdTeniskiKlub">Rezerviraj teren</a>
                 </tr>
             }
         </tbody>
